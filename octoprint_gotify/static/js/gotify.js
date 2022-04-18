@@ -1,5 +1,5 @@
 $(function() {
-    function PushoverViewModel(parameters) {
+    function GotifyViewModel(parameters) {
         var self = this;
 
         self.settingsViewModel = parameters[1];
@@ -15,23 +15,20 @@ $(function() {
             self.testSuccessful(false);
             self.testMessage("");
 
-            var apikey = $('#apikey').val();
+            var app_token = $('#app_token').val();
             var userkey = $('#userkey').val();
-            var sound = $('#pushover-sound option:selected').text();
             var device = $('#device').val();
             var image = $('#image').is(':checked');
 
             var payload = {
                 command: "test",
-                api_key: apikey,
-                user_key: userkey,
-                sound: sound,
+                app_token: app_token,
                 device: device,
                 image: image,
             };
 
             $.ajax({
-                url: API_BASEURL + "plugin/pushover",
+                url: API_BASEURL + "plugin/gotify",
                 type: "POST",
                 dataType: "json",
                 data: JSON.stringify(payload),
@@ -56,11 +53,11 @@ $(function() {
         };
 
         self.has_own_token = function() {
-            return self.settings.plugins.pushover.token() != '' && self.settings.plugins.pushover.token() != self.settings.plugins.pushover.default_token();
+            return self.settings.plugins.gotify.token() != '' && self.settings.plugins.gotify.token() != self.settings.plugins.gotify.default_token();
         };
 
     }
 
     // view model class, parameters for constructor, container to bind to
-    ADDITIONAL_VIEWMODELS.push([PushoverViewModel, ["loginStateViewModel", "settingsViewModel"], document.getElementById("settings_plugin_pushover")]);
+    ADDITIONAL_VIEWMODELS.push([GotifyViewModel, ["loginStateViewModel", "settingsViewModel"], document.getElementById("settings_plugin_gotify")]);
 });

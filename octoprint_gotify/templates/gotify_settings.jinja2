@@ -1,0 +1,150 @@
+<h3>{{ _('Gotify Configuration') }}</h3>
+
+{% trans %}
+<p>
+    In order to use the Gotify plugin enter your app key below. You can create an app key in you gotify instance under
+    applications
+    </a>.
+</p>{% endtrans %}
+
+<form class="form-horizontal">
+    <h4>{{ _('General') }}</h4>
+
+    <div class="control-group">
+        <label class="control-label">{{ _('Gotify base URL') }}</label>
+        <div class="controls">
+            <input type="text" class="input-block-level" id="url" data-bind="value: settings.plugins.gotify.gotify_server_base_url">
+            <span class="help-inline">{{ _('Base URL of your gotify instance. (e.g: https://push.example.com)') }}</span>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label">{{ _('App Key') }}</label>
+        <div class="controls">
+            <div class="row-fluid" style="margin-bottom: 5px">
+                <div class="span8">
+                    <input type="text" class="input-block-level" id="app_token"
+                        data-bind="value: settings.plugins.gotify.token">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <div class="controls">
+            <button class="btn" data-bind="click: function() { testNotification() }"><i class="icon-spinner icon-spin"
+                    data-bind="visible: testActive()"></i> {{ _('Test Gotify') }}</button> <span
+                data-bind="visible: testResult() && testSuccessful()">{{ _('Sent successfully') }}</span><span
+                data-bind="visible: testResult() && !testSuccessful()">{{ _('Sending failed') }}: <span
+                    data-bind="text: testMessage"></span></span>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <div class="controls">
+            <label class="checkbox">
+                <input type="checkbox" data-bind="checked: settings.plugins.gotify.image" id="image"> {{ _('Use the
+                camera of Octoprint to send a image') }}
+            </label>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label">{{ _('Server Url') }}</label>
+        <div class="controls">
+            <input type="text" class="input-block-level" id="url" data-bind="value: settings.plugins.gotify.url">
+            <span class="help-inline">{{ _('Displayed below the notification. Enter a valid url (e.g:
+                https://www.myserver.de/octoprint) or leave it empty to use the defaul machine name.') }}</span>
+        </div>
+    </div>
+
+    <h4>{{ _('Scheduled notifications') }}</h4>
+
+    <div class="control-group">
+        <label class="control-label">{{ _('Notify me (minutes)') }}</label>
+        <div class="controls">
+            <select data-bind="value: settings.plugins.gotify.events.Scheduled.mod">
+                <option value="">{{ _('Off') }}</option>
+                <option value="2">{{ _('Every 2 minutes') }}</option>
+                <option value="5">{{ _('Every 5 minutes') }}</option>
+                <option value="10">{{ _('Every 10 minutes') }}</option>
+                <option value="20">{{ _('Every 20 minutes') }}</option>
+                <option value="30">{{ _('Every 30 minutes') }}</option>
+                <option value="40">{{ _('Every 40 minutes') }}</option>
+                <option value="50">{{ _('Every 50 minutes') }}</option>
+                <option value="60">{{ _('Every hour') }}</option>
+            </select>
+            <span class="help-inline">{{ _('Send regular updates every y minutes.') }}</span>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label">{{ _('Notify me (percent)') }}</label>
+        <div class="controls">
+            <select data-bind="value: settings.plugins.gotify.events.Progress.mod">
+                <option value="">{{ _('Off') }}</option>
+                <option value="2">{{ _('Every 2 percent') }}</option>
+                <option value="5">{{ _('Every 5 percent') }}</option>
+                <option value="10">{{ _('Every 10 percent') }}</option>
+                <option value="15">{{ _('Every 15 percent') }}</option>
+                <option value="20">{{ _('Every 20 percent') }}</option>
+                <option value="25">{{ _('Every 25 percent') }}</option>
+            </select>
+            <span class="help-inline">{{ _('Send regular updates every y percent.') }}</span>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">{{ _('Priority') }}</label>
+        <div class="controls">
+            <select
+                data-bind="value: settings.plugins.gotify.events.Scheduled.priority">
+                <option value="0">{{ _('Lowest Priority') }}</option>
+                <option value="1">{{ _('Low Priority') }}</option>
+                <option value="4">{{ _('Normal Priority') }}</option>
+                <option value="8">{{ _('High Priority') }}</option>
+            </select>
+        </div>
+    </div>
+    <h4>{{ _('Event notifications') }}</h4>
+
+    {% for key, value in plugin_gotify_events.items() if not value.hidden and not value.custom %}
+    <div class="control-group">
+        <label class="control-label">{{ value.name }}</label>
+        <div class="controls">
+            <select
+                data-bind="value: settings.plugins.gotify.events.{{ key }}.priority">
+                <option value="">{{ _('Off') }}</option>
+                <option value="0">{{ _('Lowest Priority') }}</option>
+                <option value="1">{{ _('Low Priority') }}</option>
+                <option value="4">{{ _('Normal Priority') }}</option>
+                <option value="8">{{ _('High Priority') }}</option>
+            </select> {% if value.help is defined %}
+            <span class="help-inline">{{ value.help }}</span> {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+
+    <div>
+        <div><small><a href="#" class="muted"
+                    onclick="$(this).children().toggleClass('icon-caret-right icon-caret-down').parent().parent().parent().next().slideToggle('fast')"><i
+                        class="icon-caret-right"></i> {{ _('Advanced options') }}</a></small></div>
+        <div class="hide">
+
+            {% for key, value in plugin_gotify_events.items() if value.hidden and not value.custom %}
+            <div class="control-group">
+                <label class="control-label">{{ value.name }}</label>
+                <div class="controls">
+                    <select data-bind="value: settings.plugins.gotify.events.{{ key }}.priority">
+                        <option value="">{{ _('Off') }}</option>
+                        <option value="0">{{ _('Lowest Priority') }}</option>
+                        <option value="1">{{ _('Low Priority') }}</option>
+                        <option value="4">{{ _('Normal Priority') }}</option>
+                        <option value="8">{{ _('High Priority') }}</option>
+                    </select> {% if value.help is defined %}
+                    <span class="help-inline">{{ value.help }}</span> {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</form>

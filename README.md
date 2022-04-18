@@ -1,19 +1,24 @@
-# OctoPrint-Pushover
-This project is a Pushover plugin for OctoPrint, I wanted to receive notifications on my phone when [Octoprint](https://octoprint.org) finished, paused or gives an error while printing, and e-mail just isn't good enough. So I build a plugin for the app/service that I use, [Pushover](https://pushover.net).
+# OctoPrint-Gotify
+
+## This is a fork of the [pushover plugin](https://github.com/niwla23/OctoPrint-Gotify) by [thijsbekke](https://github.com/thijsbekke)
+
+This project is a Gotify plugin for OctoPrint, I wanted to receive notifications on my phone when [Octoprint](https://octoprint.org) finished, paused or gives an error while printing, and e-mail just isn't good enough. So I build a plugin for the app/service that I use, [Gotify](https://gotify.net).
 
 ## Installing
 
 Install it trought the bundled [Plugin manager](http://docs.octoprint.org/en/master/bundledplugins/pluginmanager.html) or manually by using this url
+
 ```
-https://github.com/thijsbekke/OctoPrint-Pushover/archive/master.zip
+https://github.com/niwla23/OctoPrint-Gotify/archive/master.zip
 ```
+
 ## Configuration
 
-Obtain an API key through the following [Link](https://pushover.net/apps/clone/octoprint), this is not necessary for this plugin to work. 
+Obtain an API key through the following [Link](https://gotify.net/apps/clone/octoprint), this is not necessary for this plugin to work.
 
-You also have to enter your user key. You can find your own user key on your [Pushover](https://pushover.net) page. Copy and paste it to the "user key" field in the settings dialog of the Octoprint-Pushover plugin. And then you are done. 
+You also have to enter your user key. You can find your own user key on your [Gotify](https://gotify.net) page. Copy and paste it to the "user key" field in the settings dialog of the Octoprint-Gotify plugin. And then you are done.
 
-Additional you can set a priority for each event you want to be notified of. 
+Additional you can set a priority for each event you want to be notified of.
 
 ## Features
 
@@ -32,10 +37,9 @@ This plugin supports the following features
 - Alert Event (M300)
 - Panic Event (M112)
 - Error Event
-- Limit to specific devices 
+- Limit to specific devices
 
-This plugin will also append an url to your OctoPrint instance with the notification. If you are missing a feature you can create an [issue](https://github.com/thijsbekke/OctoPrint-Pushover/issues) or you are welcome to contributing by creating a pull request. 
-
+This plugin will also append an url to your OctoPrint instance with the notification. If you are missing a feature you can create an [issue](https://github.com/niwla23/OctoPrint-Gotify/issues) or you are welcome to contributing by creating a pull request.
 
 ### Priority
 
@@ -59,17 +63,18 @@ Messages sent with this priority bypasses a user's quiet hours. These messages w
 
 ### Sound
 
-You can specify a custom sound, your device will play this sound when receiving a message. You can specify one of [these sounds](https://pushover.net/api#sounds)
+You can specify a custom sound, your device will play this sound when receiving a message. You can specify one of [these sounds](https://gotify.net/api#sounds)
 
 ### Devices
 
-You can enter the name of your device to send the message directly to that device, rather than all of your devices. An alternative option is to [create](https://pushover.net/groups/build) a delivery group where you can specify your devices and enter that group key as an user key in this plugin.
+You can enter the name of your device to send the message directly to that device, rather than all of your devices. An alternative option is to [create](https://gotify.net/groups/build) a delivery group where you can specify your devices and enter that group key as an user key in this plugin.
 
 ### Pause/Waiting Event
 
 When for example a ```M0``` or a ```M226``` command is received and the settings are complied. This plugin will send a notification. And as bonus it will append any ```M70``` message to the notification, so you can remind yourself which colour you need to switch.
 
 For example
+
 ```GCODE
 G1 X109.071 Y96.268 E3.54401
 G1 X109.186 Y97.500 E3.63927
@@ -79,10 +84,8 @@ G1 X109.186 Y102.500 E4.02408
 G1 X108.789 Y104.770 E4.20140
 ```
 
-
-
 ### Support my efforts
 
-This is a fun project for me, and I do my best to support those that have issues with this plugin. If you want you can return the favor and leave me a tip trough [paypal](https://paypal.me/thijsbekke) ! 
+You can support the original creator on [paypal](https://paypal.me/thijsbekke) !
 
 [![paypal](https://www.paypalobjects.com/webstatic/mktg/logo/pp_cc_mark_37x23.jpg)](https://paypal.me/thijsbekke)
