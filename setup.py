@@ -14,14 +14,14 @@ plugin_package = "octoprint_%s" % plugin_identifier
 plugin_name = "OctoPrint-Gotify"
 
 # The plugin's version. Can be overwritten within OctoPrint's internal data via __plugin_version__ in the plugin module
-plugin_version = "0.3.8"
+plugin_version = "0.1.0"
 
 # The plugin's description. Can be overwritten within OctoPrint's internal data via __plugin_description__ in the plugin
 # module
 plugin_description = "Pushes notifications about finished print jobs trough Gotify."
 
 # The plugin's author. Can be overwritten within OctoPrint's internal data via __plugin_author__ in the plugin module
-plugin_author = "Thijs Bekke"
+plugin_author = "Alwin Lohrie"
 
 # The plugin's author's mail address.
 plugin_author_email = "alwin@cloudserver.click"
